@@ -1,31 +1,31 @@
-package dev.flab.studytogether.core.domain.member.service;
+package dev.flab.studytogether.infra.mail;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-@Service
+@Component
 @RequiredArgsConstructor
-public class NotificationService {
-    private static final String EMAIL_ADDRESS_VERIFY_MAIL_SUBJECT = "회원 가입 이메일 인증";
+public class JavaMailClient implements MailClient{
+
     private final JavaMailSender javaMailSender;
 
-    public void sendEmail(String email, String subject, String content) {
+    @Override
+    public void sendMail(String subject, String content, String receiverEmailAddress) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
-            mimeMessageHelper.setTo(email);
+            mimeMessageHelper.setTo(receiverEmailAddress);
             mimeMessageHelper.setSubject(subject);
             mimeMessageHelper.setText(content);
 
             javaMailSender.send(mimeMessage);
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
-
 }

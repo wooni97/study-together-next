@@ -1,7 +1,6 @@
 package dev.flab.studytogether.util;
 
 import dev.flab.studytogether.core.domain.member.entity.MemberV2;
-import dev.flab.studytogether.core.domain.room.entity.ActivateStatus;
 import dev.flab.studytogether.core.domain.studygroup.entity.ParticipantV2;
 import dev.flab.studytogether.core.domain.studygroup.entity.StudyGroup;
 
@@ -19,7 +18,7 @@ public class TestFixtureUtils {
     public static StudyGroup randomStudyGroup() {
         String groupTitle = "Java Study Group";
         int maxParticipants = 10;
-        ActivateStatus activateStatus = ActivateStatus.ACTIVATED;
+        StudyGroup.ActivateStatus activateStatus = StudyGroup.ActivateStatus.ACTIVATED;
 
         return new StudyGroup(groupTitle, maxParticipants, activateStatus);
     }
@@ -27,7 +26,7 @@ public class TestFixtureUtils {
     public static StudyGroup randomStudyGroupWithParticipants() {
         String groupTitle = "Java Study Group";
         int maxParticipants = 10;
-        ActivateStatus activateStatus = ActivateStatus.ACTIVATED;
+        StudyGroup.ActivateStatus activateStatus = StudyGroup.ActivateStatus.ACTIVATED;
 
         StudyGroup studyGroup = new StudyGroup(groupTitle, maxParticipants, activateStatus);
 
